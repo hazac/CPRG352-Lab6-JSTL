@@ -18,6 +18,7 @@
             <div>
                 <label>Username:</label>
                 <input type="text" name="name" value="">
+                <input type="hidden" name="action" value="register">
                 <input type="submit" value="Register name">
             </div>
         </form>

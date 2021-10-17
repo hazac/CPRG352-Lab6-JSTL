@@ -16,20 +16,31 @@
         <h1>Shopping List</h1>
         <div>
             <p>${message}</p> 
-            <a href="ShoppingList?logout">Log out</a>
+            <a href="ShoppingList?action=logout">Log out</a>
         </div>
         <div>
             <h2>List</h2>
-            <form method="POST" action="ShoppingList">
+            <form method="POST" action="">
                 <div>
                     <label>Add item:</label>
                     <input type="text" name="item" value="">
                     <input type="submit" value="Add">
+                    <input type="hidden" name="action" value="add">
                 </div>
             </form>
         </div>
         <div>
-
+            <form method="POST" action="">
+                <c:if test="${displayList}">  
+                    <ul>
+                    <c:forEach items="${list}" var="item">
+                        <li><input type="radio" name="product" value="${item}">${item}</li>
+                    </c:forEach>  
+                    </ul>
+                    <input type="submit" value="Delete">
+                    <input type="hidden" name="action" value="delete">
+                </c:if>
+            </form>
         </div>    
     </body>
 </html>
