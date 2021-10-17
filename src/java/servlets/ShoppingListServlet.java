@@ -68,27 +68,15 @@ public class ShoppingListServlet extends HttpServlet {
             return;
         }
         if(action.equals("delete")){
-            
+            String del = request.getParameter("product");
+            ArrayList<String> shopList = (ArrayList<String>)session.getAttribute("list");
+            shopList.remove(del);
+            session.setAttribute("list", shopList);
+            request.setAttribute("displayList", true);
+            getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
+            return;
         }
         
     }
 
 }
-
-/*
-        
-        if(session.getAttribute("username")!= null){
-            String shopList = (String)session.getAttribute("list");
-            
-            if(item!= null){
-                shopList = shopList + item + ",";
-                session.setAttribute("list", shopList);
-                
-            }
-            else{
-                
-            }
-        }
-        else{
-            
-        }*/
