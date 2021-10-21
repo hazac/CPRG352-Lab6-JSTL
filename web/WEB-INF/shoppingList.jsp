@@ -26,6 +26,9 @@
                     <input type="text" name="item" value="">
                     <input type="submit" value="Add">
                     <input type="hidden" name="action" value="add">
+                    <c:if test="${missingItem}">
+                        <span>Item name is required.</span>
+                    </c:if>
                 </div>
             </form>
         </div>
@@ -37,6 +40,11 @@
                         <li><input type="radio" name="product" value="${item}">${item}</li>
                     </c:forEach>  
                     </ul>
+                    <c:if test="${selectDel}">
+                        <div>
+                            <span>Please choose an item to be deleted.</span>
+                        </div>    
+                    </c:if>
                     <input type="submit" value="Delete">
                     <input type="hidden" name="action" value="delete">
                 </c:if>

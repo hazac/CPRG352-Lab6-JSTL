@@ -65,9 +65,14 @@ public class ShoppingListServlet extends HttpServlet {
         }
         if(action.equals("add")){
             String user = (String)session.getAttribute("user");
-            String item = request.getParameter("item");
             ArrayList<String> shopList = (ArrayList<String>)session.getAttribute("list");
-            shopList.add(item);
+            String item = request.getParameter("item");
+            if(item == null || item.equals("")){
+                request.setAttribute("missingItem", true);                
+            }
+            else{                
+                shopList.add(item);
+            } 
             request.setAttribute("message", "Hello, " + user);
             session.setAttribute("list", shopList);
             request.setAttribute("displayList", true);
@@ -76,21 +81,26 @@ public class ShoppingListServlet extends HttpServlet {
         }
         if(action.equals("delete")){
             String user = (String)session.getAttribute("user");
-            String del = request.getParameter("product");
             ArrayList<String> shopList = (ArrayList<String>)session.getAttribute("list");
-            shopList.remove(del);
+            String del = request.getParameter("product");
+            if(del == null || del.isEmpty()){
+                request.setAttribute("selectDel", true);
+                /*getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
+                return;*/
+            }
+            else{                
+                shopList.remove(del);
+            }
             request.setAttribute("message", "Hello, " + user);
             session.setAttribute("list", shopList);
             if(shopList.isEmpty()){
-                request.setAttribute("displayList", false);
+            request.setAttribute("displayList", false);
             }
             else{
                 request.setAttribute("displayList", true);
             }
             getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
-            return;
-        }
-        
+            return;            
+        }        
     }
-
 }
